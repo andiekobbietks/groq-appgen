@@ -148,3 +148,47 @@ architecture-beta
     feedback:R --> L:version_control
     version_control:R --> L:sharing
     feedback:B -- T:groq_sdk
+
+```mermaid
+architecture-beta
+    group infrastructure(cloud)[Infrastructure]
+        service dns(server)[Route53] in infrastructure
+        service cdn(cloud)[CloudFront] in infrastructure
+        service app_server(server)[ApplicationServer] in infrastructure
+        service db(database)[Database] in infrastructure
+
+    group frontend(cloud)[Frontend]
+        service nextjs(code)[NextJS] in frontend
+        service ts(code)[TypeScript] in frontend
+
+    group user_interaction(cloud)[UserInteraction]
+        service user(internet)[User] in user_interaction
+
+    user:R --> L:dns
+    dns:R --> L:cdn
+    cdn:R --> L:app_server
+    app_server:R --> L:nextjs
+    nextjs:R --> L:ts
+
+
+```markdown
+```mermaid
+architecture-beta
+    group backend(cloud)[Backend]
+        service groq_sdk(code)[GroqSDK] in backend
+        service session_manager(server)[SessionManager] in backend
+        service content_guard(internet)[LlamaGuard] in backend
+
+    group features(cloud)[Features]
+        service feedback(server)[InteractiveFeedbackSystem] in features
+        service version_control(server)[VersionControl] in features
+        service sharing(server)[SharingExport] in features
+
+    nextjs:B -- T:groq_sdk
+    groq_sdk:R --> L:session_manager
+    groq_sdk:R --> L:content_guard
+    groq_sdk:R --> L:db
+    ts:R --> L:feedback
+    feedback:R --> L:version_control
+    version_control:R --> L:sharing
+    feedback:B -- T:groq_sdk
