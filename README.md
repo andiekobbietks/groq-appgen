@@ -110,28 +110,29 @@ You can explore more details and view additional files in the [repository](https
 
 If you need further details or additional diagrams, please let me know!
 
+```mermaid
 architecture-beta
     group infrastructure(logos:aws-cloud)[Infrastructure]
-        service dns(logos:aws-route53)[Route53] in infrastructure
+        service dns(logos:aws-route53)[Route 53] in infrastructure
         service cdn(logos:aws-cloudfront)[CloudFront] in infrastructure
-        service app_server(logos:aws-ec2)[ApplicationServer] in infrastructure
+        service app_server(logos:aws-ec2)[Application Server] in infrastructure
         service db(logos:aws-rds)[Database] in infrastructure
 
     group frontend(logos:aws-cloud)[Frontend]
-        service nextjs(logos:aws-amplify)[Nextjs] in frontend
+        service nextjs(logos:aws-amplify)[Next.js] in frontend
         service ts(logos:aws-lambda)[TypeScript] in frontend
 
     group backend(logos:aws-cloud)[Backend]
-        service groq_sdk(logos:aws-lambda)[GroqSDK] in backend
-        service session_manager(logos:aws-cognito)[SessionManager] in backend
+        service groq_sdk(logos:aws-lambda)[Groq SDK] in backend
+        service session_manager(logos:aws-cognito)[Session Manager] in backend
         service content_guard(logos:aws-waf)[LlamaGuard] in backend
 
     group features(logos:aws-cloud)[Features]
-        service feedback(logos:aws-sns)[InteractiveFeedbackSystem] in features
-        service version_control(logos:aws-codecommit)[VersionControl] in features
-        service sharing(logos:aws-s3)[SharingExport] in features
+        service feedback(logos:aws-sns)[Interactive Feedback System] in features
+        service version_control(logos:aws-codecommit)[Version Control] in features
+        service sharing(logos:aws-s3)[Sharing & Export] in features
 
-    group user_interaction(logos:aws-cloud)[UserInteraction]
+    group user_interaction(logos:aws-cloud)[User Interaction]
         service user(logos:aws-iam)[User] in user_interaction
 
     user:R --> L:dns
@@ -147,4 +148,3 @@ architecture-beta
     feedback:R --> L:version_control
     version_control:R --> L:sharing
     feedback:B -- T:groq_sdk
-
