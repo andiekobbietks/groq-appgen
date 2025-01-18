@@ -187,11 +187,15 @@ architecture-beta
         service groq_sdk(code)[GroqSDK] in backend
         service session_manager(server)[SessionManager] in backend
         service content_guard(internet)[LlamaGuard] in backend
+        service db(database)[Database] in backend
 
     group features(cloud)[Features]
         service feedback(server)[InteractiveFeedbackSystem] in features
         service version_control(server)[VersionControl] in features
         service sharing(server)[SharingExport] in features
+
+    service nextjs(server)[NextJS] 
+    service ts(server)[TypeScript] 
 
     nextjs:B -- T:groq_sdk
     groq_sdk:R --> L:session_manager
