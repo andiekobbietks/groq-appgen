@@ -112,28 +112,28 @@ If you need further details or additional diagrams, please let me know!
 
 ```mermaid
 architecture-beta
-    group infrastructure(logos:aws-cloud)[Infrastructure]
-        service dns(logos:aws-route53)[Route 53] in infrastructure
-        service cdn(logos:aws-cloudfront)[CloudFront] in infrastructure
-        service app_server(logos:aws-ec2)[Application Server] in infrastructure
-        service db(logos:aws-rds)[Database] in infrastructure
+    group infrastructure(cloud)[Infrastructure]
+        service dns(server)[Route53] in infrastructure
+        service cdn(cloud)[CloudFront] in infrastructure
+        service app_server(server)[ApplicationServer] in infrastructure
+        service db(database)[Database] in infrastructure
 
-    group frontend(logos:aws-cloud)[Frontend]
-        service nextjs(logos:aws-amplify)[Next.js] in frontend
-        service ts(logos:aws-lambda)[TypeScript] in frontend
+    group frontend(cloud)[Frontend]
+        service nextjs(code)[NextJS] in frontend
+        service ts(code)[TypeScript] in frontend
 
-    group backend(logos:aws-cloud)[Backend]
-        service groq_sdk(logos:aws-lambda)[Groq SDK] in backend
-        service session_manager(logos:aws-cognito)[Session Manager] in backend
-        service content_guard(logos:aws-waf)[LlamaGuard] in backend
+    group backend(cloud)[Backend]
+        service groq_sdk(code)[GroqSDK] in backend
+        service session_manager(server)[SessionManager] in backend
+        service content_guard(internet)[LlamaGuard] in backend
 
-    group features(logos:aws-cloud)[Features]
-        service feedback(logos:aws-sns)[Interactive Feedback System] in features
-        service version_control(logos:aws-codecommit)[Version Control] in features
-        service sharing(logos:aws-s3)[Sharing & Export] in features
+    group features(cloud)[Features]
+        service feedback(server)[InteractiveFeedbackSystem] in features
+        service version_control(server)[VersionControl] in features
+        service sharing(server)[SharingExport] in features
 
-    group user_interaction(logos:aws-cloud)[User Interaction]
-        service user(logos:aws-iam)[User] in user_interaction
+    group user_interaction(cloud)[UserInteraction]
+        service user(internet)[User] in user_interaction
 
     user:R --> L:dns
     dns:R --> L:cdn
