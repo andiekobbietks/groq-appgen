@@ -149,6 +149,11 @@ architecture-beta
     version_control:R --> L:sharing
     feedback:B -- T:groq_sdk
 
+To ensure the diagrams work on GitHub, we need to follow GitHub's Markdown syntax for Mermaid diagrams. Here’s how you can format the two simplified diagrams to work on GitHub:
+
+Diagram 1: Infrastructure and Frontend
+This diagram focuses on the Infrastructure and Frontend components and their interactions.
+
 ```mermaid
 architecture-beta
     group infrastructure(cloud)[Infrastructure]
@@ -170,6 +175,12 @@ architecture-beta
     app_server:R --> L:nextjs
     nextjs:R --> L:ts
 
+
+---
+
+### **Diagram 2: Backend and Features**
+
+This diagram focuses on the **Backend** and **Features** components and their interactions.
 
 ```markdown
 ```mermaid
