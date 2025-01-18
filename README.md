@@ -18,6 +18,63 @@ An interactive web application that generates and modifies web applications usin
 - React Syntax Highlighter
 - UUID for session management
 
+To ensure the diagrams work on GitHub, we need to follow GitHub's Markdown syntax for Mermaid diagrams. Here’s how you can format the two simplified diagrams to work on GitHub:
+
+### **Diagram 1: Infrastructure and Frontend**
+This diagram focuses on the Infrastructure and Frontend components and their interactions.
+
+```mermaid
+architecture-beta
+    group infrastructure(cloud)[Infrastructure]
+        service dns(server)[Route53] in infrastructure
+        service cdn(cloud)[CloudFront] in infrastructure
+        service app_server(server)[ApplicationServer] in infrastructure
+        service db(database)[Database] in infrastructure
+
+    group frontend(cloud)[Frontend]
+        service nextjs(code)[NextJS] in frontend
+        service ts(code)[TypeScript] in frontend
+
+    group user_interaction(cloud)[UserInteraction]
+        service user(internet)[User] in user_interaction
+
+    user:R --> L:dns
+    dns:R --> L:cdn
+    cdn:R --> L:app_server
+    app_server:R --> L:nextjs
+    nextjs:R --> L:ts
+```
+
+### **Diagram 2: Backend and Features**
+
+This diagram focuses on the **Backend** and **Features** components and their interactions.
+
+```mermaid
+architecture-beta
+    group backend(cloud)[Backend]
+        service groq_sdk(code)[GroqSDK] in backend
+        service session_manager(server)[SessionManager] in backend
+        service content_guard(internet)[LlamaGuard] in backend
+        service db(database)[Database] in backend
+
+    group features(cloud)[Features]
+        service feedback(server)[InteractiveFeedbackSystem] in features
+        service version_control(server)[VersionControl] in features
+        service sharing(server)[SharingExport] in features
+
+    service nextjs(server)[NextJS] 
+    service ts(server)[TypeScript] 
+
+    nextjs:B -- T:groq_sdk
+    groq_sdk:R --> L:session_manager
+    groq_sdk:R --> L:content_guard
+    groq_sdk:R --> L:db
+    ts:R --> L:feedback
+    feedback:R --> L:version_control
+    version_control:R --> L:sharing
+    feedback:B -- T:groq_sdk
+```
+
 ## Environment Variables
 
 Required environment variables:
@@ -110,6 +167,8 @@ You can explore more details and view additional files in the [repository](https
 
 If you need further details or additional diagrams, please let me know!
 
+More Advanced AWS
+
 ```mermaid
 architecture-beta
     group infrastructure(cloud)[Infrastructure]
@@ -149,62 +208,3 @@ architecture-beta
     version_control:R --> L:sharing
     feedback:B -- T:groq_sdk
 ```
-
-To ensure the diagrams work on GitHub, we need to follow GitHub's Markdown syntax for Mermaid diagrams. Here’s how you can format the two simplified diagrams to work on GitHub:
-
-### **Diagram 1: Infrastructure and Frontend**
-This diagram focuses on the Infrastructure and Frontend components and their interactions.
-
-```mermaid
-architecture-beta
-    group infrastructure(cloud)[Infrastructure]
-        service dns(server)[Route53] in infrastructure
-        service cdn(cloud)[CloudFront] in infrastructure
-        service app_server(server)[ApplicationServer] in infrastructure
-        service db(database)[Database] in infrastructure
-
-    group frontend(cloud)[Frontend]
-        service nextjs(code)[NextJS] in frontend
-        service ts(code)[TypeScript] in frontend
-
-    group user_interaction(cloud)[UserInteraction]
-        service user(internet)[User] in user_interaction
-
-    user:R --> L:dns
-    dns:R --> L:cdn
-    cdn:R --> L:app_server
-    app_server:R --> L:nextjs
-    nextjs:R --> L:ts
-```
-
-### **Diagram 2: Backend and Features**
-
-This diagram focuses on the **Backend** and **Features** components and their interactions.
-
-```mermaid
-architecture-beta
-    group backend(cloud)[Backend]
-        service groq_sdk(code)[GroqSDK] in backend
-        service session_manager(server)[SessionManager] in backend
-        service content_guard(internet)[LlamaGuard] in backend
-        service db(database)[Database] in backend
-
-    group features(cloud)[Features]
-        service feedback(server)[InteractiveFeedbackSystem] in features
-        service version_control(server)[VersionControl] in features
-        service sharing(server)[SharingExport] in features
-
-    service nextjs(server)[NextJS] 
-    service ts(server)[TypeScript] 
-
-    nextjs:B -- T:groq_sdk
-    groq_sdk:R --> L:session_manager
-    groq_sdk:R --> L:content_guard
-    groq_sdk:R --> L:db
-    ts:R --> L:feedback
-    feedback:R --> L:version_control
-    version_control:R --> L:sharing
-    feedback:B -- T:groq_sdk
-```
-
-
