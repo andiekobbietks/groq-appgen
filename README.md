@@ -109,3 +109,42 @@ graph TD
 You can explore more details and view additional files in the [repository](https://github.com/andiekobbietks/groq-appgen).
 
 If you need further details or additional diagrams, please let me know!
+
+architecture-beta
+    group infrastructure(logos:aws-cloud)[Infrastructure]
+        service dns(logos:aws-route53)[Route53] in infrastructure
+        service cdn(logos:aws-cloudfront)[CloudFront] in infrastructure
+        service app_server(logos:aws-ec2)[ApplicationServer] in infrastructure
+        service db(logos:aws-rds)[Database] in infrastructure
+
+    group frontend(logos:aws-cloud)[Frontend]
+        service nextjs(logos:aws-amplify)[Nextjs] in frontend
+        service ts(logos:aws-lambda)[TypeScript] in frontend
+
+    group backend(logos:aws-cloud)[Backend]
+        service groq_sdk(logos:aws-lambda)[GroqSDK] in backend
+        service session_manager(logos:aws-cognito)[SessionManager] in backend
+        service content_guard(logos:aws-waf)[LlamaGuard] in backend
+
+    group features(logos:aws-cloud)[Features]
+        service feedback(logos:aws-sns)[InteractiveFeedbackSystem] in features
+        service version_control(logos:aws-codecommit)[VersionControl] in features
+        service sharing(logos:aws-s3)[SharingExport] in features
+
+    group user_interaction(logos:aws-cloud)[UserInteraction]
+        service user(logos:aws-iam)[User] in user_interaction
+
+    user:R --> L:dns
+    dns:R --> L:cdn
+    cdn:R --> L:app_server
+    app_server:R --> L:nextjs
+    nextjs:R --> L:ts
+    nextjs:B -- T:groq_sdk
+    groq_sdk:R --> L:session_manager
+    groq_sdk:R --> L:content_guard
+    groq_sdk:R --> L:db
+    ts:R --> L:feedback
+    feedback:R --> L:version_control
+    version_control:R --> L:sharing
+    feedback:B -- T:groq_sdk
+
